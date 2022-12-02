@@ -64,31 +64,16 @@ part1();
 
 // this is pretty ugly but w/e
 const part2 = () => {
-  const getValueFromSymbol = symbol => {
-    switch (symbol) {
-      case 'A':
-        return ROCK;
-      case 'B':
-        return PAPER;
-      case 'C':
-        return SCISSORS;
-      default:
-        throw new Error('Symbol not found');
-    }
-  };
-
-  const getWinValue = (winSymbol) => {
-    switch (winSymbol) {
-      case 'X':
-        return LOSS;
-      case 'Y':
-        return DRAW;
-      case 'Z':
-        return WIN;
-      default:
-        throw new Error('Win Symbol not found');
-    }
-  };
+  const symbolValues = {
+    'A': ROCK,
+    'B': PAPER,
+    'C': SCISSORS
+  }
+  const winValues = {
+    'X': LOSS,
+    'Y': DRAW,
+    'Z': WIN
+  }
 
   const winMap = {
     [ROCK]: PAPER,
@@ -119,7 +104,7 @@ const part2 = () => {
 
     const total = input.split('\n').reduce((acc, row) => {
       const [opp, win] = row.split(' ');
-      acc += getValue(getValueFromSymbol(opp), getWinValue(win));
+      acc += getValue(symbolValues[opp], winValues[win]);
       return acc;
     }, 0);
     
